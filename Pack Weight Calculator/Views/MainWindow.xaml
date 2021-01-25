@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Pack_Weight_Calculator.ViewModels"
         xmlns:viewModel="clr-namespace:Pack_Weight_Calculator.ViewModels"
         mc:Ignorable="d"
-        Title="Pack Weight Calculator" Icon="\Resources\Hiker.ico" Height="450" Width="800">
+        Title="Pack Weight Calculator" Icon="..\Resources\Hiker.ico" Height="450" Width="800">
     <Window.Resources>
         <viewModel:MainViewModel x:Key="vm" />
     </Window.Resources>
