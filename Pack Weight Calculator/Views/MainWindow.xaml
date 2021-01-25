@@ -1,0 +1,56 @@
+﻿<Window x:Class="Pack_Weight_Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pack_Weight_Calculator.ViewModels"
+        xmlns:viewModel="clr-namespace:Pack_Weight_Calculator.ViewModels"
+        mc:Ignorable="d"
+        Title="Pack Weight Calculator" Icon="\Resources\Hiker.ico" Height="450" Width="800">
+    <Window.Resources>
+        <viewModel:MainViewModel x:Key="vm" />
+    </Window.Resources>
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="SearchLabel" Content="Search Inventory:" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox x:Name="SearchTextBox" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" MinHeight="25" FontSize="14"/>
+        <Label x:Name="InventoryLabel" Content="Inventory:" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <ListBox x:Name="InventoryListBox" Grid.Column="1" Grid.Row="2" Grid.RowSpan="4" ItemsSource="{Binding Source={StaticResource vm}, Path=ItemsInInventory}" DisplayMemberPath="ItemName" SelectedItem="{Binding Source={StaticResource vm}, Path=SelectedInventoryItem}" />
+        <Label x:Name="InventoryDirectoryLabel" Content="Loaded Inventory: " Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <TextBox x:Name="InventoryDirectoryTextbox" Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" MinHeight="25" FontSize="14" Text="{Binding Source={StaticResource vm}, Path=Filename}"/>
+        <Button x:Name="AddItemToPackButton" Grid.Column="2" Grid.Row="3" Content="Add" Command="{Binding Source={StaticResource vm}, Path=AddItemToPackCommand}"/>
+        <Button x:Name="RemoveItemFromPackButton" Grid.Column="2" Grid.Row="4" Content="Remove" Command="{Binding Source={StaticResource vm}, Path=RemoveItemFromPackCommand}"/>
+        <Label x:Name="ItemsInPackLabel" Content="Items In Pack:" Grid.Column="3" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <ListBox x:Name="ItemsInPackListBox" Grid.Column="3" Grid.Row="2" Grid.RowSpan="4" ItemsSource="{Binding Source={StaticResource vm}, Path=ItemsInPack}" DisplayMemberPath="ItemName" SelectedItem="{Binding Source={StaticResource vm}, Path=SelectedPackItem}" />
+        <Button x:Name="BrowseButton" Content="..." Grid.Column="4" Grid.Row="1" VerticalAlignment="Top" MinHeight="25" Command="{Binding Source={StaticResource vm}, Path=BrowseCommand}"/>
+        <Label x:Name="WeightLabel" Content="Overall Weight" Grid.Column="5" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <Label x:Name="CalculatedWeightLabel" Content="{Binding Source={StaticResource vm}, Path=PackWeight}"  Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label x:Name="PackDetailLabel" Content="Pack Detail:" Grid.Column="5" Grid.Row="1" VerticalAlignment="Bottom" />
+        <DataGrid x:Name="PackDetailDatagrid" Grid.Column="5" Grid.Row="2" Grid.RowSpan="4" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="150"/>
+                <DataGridTextColumn Width="20"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
