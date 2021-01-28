@@ -34,6 +34,12 @@ namespace Pack_Weight_Calculator.Commands
 
             if (ButtonName == "RemoveFromPackButton")
                 ViewModel.RemoveItemFromPack();
+
+            if (ButtonName == "SearchInventory")
+                ViewModel.SearchInventory();
+
+            if (ButtonName == "ClearSearch")
+                ViewModel.ClearSearch();
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Pack_Weight_Calculator.ViewModels"
         xmlns:viewModel="clr-namespace:Pack_Weight_Calculator.ViewModels"
         mc:Ignorable="d"
-        Title="Pack Weight Calculator" Icon="..\Resources\Hiker.ico" Height="450" Width="800">
+        Title="Pack Weight Calculator" Icon="..\Resources\Hiker.ico" Height="550" Width="1000">
     <Window.Resources>
         <viewModel:MainViewModel x:Key="vm" />
     </Window.Resources>
@@ -33,8 +33,10 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Label x:Name="SearchLabel" Content="Search Inventory:" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox x:Name="SearchTextBox" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" MinHeight="25" FontSize="14"/>
+        <TextBox x:Name="SearchTextBox" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="190" MinHeight="25" FontSize="14" Text="{Binding Source={StaticResource vm}, Path=SearchItemName}" />
         <Label x:Name="InventoryLabel" Content="Inventory:" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <Button x:Name="SearchButton" Content="Search" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Height="25" Command="{Binding Source={StaticResource vm}, Path=SearchInventoryCommand}"/>
+        <Button x:Name="ClearButton" Content="Clear" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Command="{Binding Source={StaticResource vm}, Path=ClearSearchCommand}" />
         <ListBox x:Name="InventoryListBox" Grid.Column="1" Grid.Row="2" Grid.RowSpan="4" ItemsSource="{Binding Source={StaticResource vm}, Path=ItemsInInventory}" DisplayMemberPath="ItemName" SelectedItem="{Binding Source={StaticResource vm}, Path=SelectedInventoryItem}" />
         <Label x:Name="InventoryDirectoryLabel" Content="Loaded Inventory: " Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <TextBox x:Name="InventoryDirectoryTextbox" Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" MinHeight="25" FontSize="14" Text="{Binding Source={StaticResource vm}, Path=Filename}"/>

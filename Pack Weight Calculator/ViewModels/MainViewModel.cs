@@ -25,6 +25,19 @@ namespace Pack_Weight_Calculator.ViewModels
         private PackItem _selectedPackItem;
         private PackItem _selectedInventoryItem;
         private string _packWeight;
+        private string _searchItemName;
+        private ObservableCollection<PackItem> _backupInventory;
+
+        public string SearchItemName
+        {
+            get { return _searchItemName; }
+            set 
+            { 
+                _searchItemName = value;
+                OnPropertyChanged("SearchItemName");
+            }
+        }
+
 
         public string PackWeight
         {
@@ -105,15 +118,19 @@ namespace Pack_Weight_Calculator.ViewModels
         public SimpleCommand BrowseCommand { get; set; }
         public SimpleCommand AddItemToPackCommand { get; set; }
         public SimpleCommand RemoveItemFromPackCommand { get; set; }
-
+        public SimpleCommand SearchInventoryCommand { get; set; }
+        public SimpleCommand ClearSearchCommand { get; set; }
 
         public MainViewModel()
         {
             _itemsInInventory = new ObservableCollection<PackItem>();
             _itemsInPack = new ObservableCollection<PackItem>();
+            _backupInventory = new ObservableCollection<PackItem>();
             BrowseCommand = new SimpleCommand(this, "BrowseButton");
             AddItemToPackCommand = new SimpleCommand(this, "AddToPackButton");
             RemoveItemFromPackCommand = new SimpleCommand(this, "RemoveFromPackButton");
+            SearchInventoryCommand = new SimpleCommand(this, "SearchInventory");
+            ClearSearchCommand = new SimpleCommand(this, "ClearSearch");
         }
 
         public void OpenFileBrowserDialog()
@@ -179,6 +196,32 @@ namespace Pack_Weight_Calculator.ViewModels
             }
             PackWeight = (tempWeightOunces/16).ToString("##.##");
             PackWeight += " lbs";
+        }
+
+        public void SearchInventory()
+        {
+            _backupInventory = ItemsInInventory;
+
+            var loopList = new ObservableCollection<PackItem>();
+
+            foreach (var item in ItemsInInventory)
+                if (item.ItemName.ToLower().Contains(SearchItemName.ToLower()))
+                    loopList.Add(item);
+
+            ItemsInInventory = loopList;
+        }
+
+        public void ClearSearch()
+        {
+            SearchItemName = "";
+
+            var loopList = new ObservableCollection<PackItem>();
+
+            for (int i = 0; i < _backupInventory.Count; i++)
+                if (ItemsInPack.Contains(_backupInventory[i]))
+                    _backupInventory.Remove(_backupInventory[i]);
+
+            ItemsInInventory = _backupInventory;
         }
     }
 }
