@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Pack_Weight_Calculator.ViewModels"
         xmlns:viewModel="clr-namespace:Pack_Weight_Calculator.ViewModels"
         mc:Ignorable="d"
-        Title="Pack Weight Calculator" Icon="..\Resources\Hiker.ico" Height="550" Width="1000">
+        Title="Pack Weight Calculator" Icon="..\Resources\Hiker.ico" Height="800" Width="1750">
     <Window.Resources>
         <viewModel:MainViewModel x:Key="vm" />
     </Window.Resources>
@@ -33,26 +33,25 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Label x:Name="SearchLabel" Content="Search Inventory:" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox x:Name="SearchTextBox" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="190" MinHeight="25" FontSize="14" Text="{Binding Source={StaticResource vm}, Path=SearchItemName}" />
+        <TextBox x:Name="SearchTextBox" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="375" MinHeight="25" FontSize="14" Text="{Binding Source={StaticResource vm}, Path=SearchItemName}" />
         <Label x:Name="InventoryLabel" Content="Inventory:" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom"/>
         <Button x:Name="SearchButton" Content="Search" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Height="25" Command="{Binding Source={StaticResource vm}, Path=SearchInventoryCommand}"/>
         <Button x:Name="ClearButton" Content="Clear" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Command="{Binding Source={StaticResource vm}, Path=ClearSearchCommand}" />
         <ListBox x:Name="InventoryListBox" Grid.Column="1" Grid.Row="2" Grid.RowSpan="4" ItemsSource="{Binding Source={StaticResource vm}, Path=ItemsInInventory}" DisplayMemberPath="ItemName" SelectedItem="{Binding Source={StaticResource vm}, Path=SelectedInventoryItem}" />
         <Label x:Name="InventoryDirectoryLabel" Content="Loaded Inventory: " Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <TextBox x:Name="InventoryDirectoryTextbox" Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" MinHeight="25" FontSize="14" Text="{Binding Source={StaticResource vm}, Path=Filename}"/>
-        <Button x:Name="AddItemToPackButton" Grid.Column="2" Grid.Row="3" Content="Add" Command="{Binding Source={StaticResource vm}, Path=AddItemToPackCommand}"/>
-        <Button x:Name="RemoveItemFromPackButton" Grid.Column="2" Grid.Row="4" Content="Remove" Command="{Binding Source={StaticResource vm}, Path=RemoveItemFromPackCommand}"/>
+        <Button x:Name="AddItemToPackButton" Grid.Column="2" Grid.Row="3" Content="Add ->" Command="{Binding Source={StaticResource vm}, Path=AddItemToPackCommand}"/>
+        <Button x:Name="RemoveItemFromPackButton" Grid.Column="2" Grid.Row="4" Content="&lt;- Remove" Command="{Binding Source={StaticResource vm}, Path=RemoveItemFromPackCommand}"/>
         <Label x:Name="ItemsInPackLabel" Content="Items In Pack:" Grid.Column="3" Grid.Row="1" VerticalAlignment="Bottom"/>
         <ListBox x:Name="ItemsInPackListBox" Grid.Column="3" Grid.Row="2" Grid.RowSpan="4" ItemsSource="{Binding Source={StaticResource vm}, Path=ItemsInPack}" DisplayMemberPath="ItemName" SelectedItem="{Binding Source={StaticResource vm}, Path=SelectedPackItem}" />
         <Button x:Name="BrowseButton" Content="..." Grid.Column="4" Grid.Row="1" VerticalAlignment="Top" MinHeight="25" Command="{Binding Source={StaticResource vm}, Path=BrowseCommand}"/>
         <Label x:Name="WeightLabel" Content="Overall Weight" Grid.Column="5" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-        <Label x:Name="CalculatedWeightLabel" Content="{Binding Source={StaticResource vm}, Path=PackWeight}"  Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Label x:Name="PackDetailLabel" Content="Pack Detail:" Grid.Column="5" Grid.Row="1" VerticalAlignment="Bottom" />
-        <DataGrid x:Name="PackDetailDatagrid" Grid.Column="5" Grid.Row="2" Grid.RowSpan="4" CanUserAddRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Width="150"/>
-                <DataGridTextColumn Width="20"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Label x:Name="CalculatedWeightLabel" Content="{Binding Source={StaticResource vm}, Path=PackWeight}"  Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="ExtraBold" FontSize="14"/>
+        <Label x:Name="PackDetailLabel" Content="Item Detail:" Grid.Column="5" Grid.Row="1" VerticalAlignment="Bottom" />
+        <Label x:Name="ItemNameLabel" Content="Item Name: " Grid.Column="5" Grid.Row="2" VerticalAlignment="Top" />
+        <Label x:Name="PackItemNameLabel" Content="{Binding Source={StaticResource vm}, Path=SelectedPackItem.ItemName}" Grid.Column="5" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="75,0,0,0"/>
+        <Label x:Name="ItemWeightLabel" Content="Item Weight (oz): " Grid.Column="5" Grid.Row="2" VerticalAlignment="Center" />
+        <Label x:Name="PackItemWeightLabel" Content="{Binding Source={StaticResource vm}, Path=SelectedPackItem.ItemWeight}" Grid.Column="5" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="110,0,0,0"/>
+
     </Grid>
 </Window>
