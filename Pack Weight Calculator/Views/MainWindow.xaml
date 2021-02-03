@@ -42,6 +42,7 @@
         <TextBox x:Name="InventoryDirectoryTextbox" Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" MinHeight="25" FontSize="14" Text="{Binding Source={StaticResource vm}, Path=Filename}"/>
         <Button x:Name="AddItemToPackButton" Grid.Column="2" Grid.Row="3" Content="Add ->" Command="{Binding Source={StaticResource vm}, Path=AddItemToPackCommand}"/>
         <Button x:Name="RemoveItemFromPackButton" Grid.Column="2" Grid.Row="4" Content="&lt;- Remove" Command="{Binding Source={StaticResource vm}, Path=RemoveItemFromPackCommand}"/>
+        <Button x:Name="RemoveAllItemsFromPackButton" Grid.Column="2" Grid.Row="5" Content="&lt;&lt;- Remove All" Command="{Binding Source= {StaticResource vm}, Path=RemoveAllItemsFromPackCommand}"/>
         <Label x:Name="ItemsInPackLabel" Content="Items In Pack:" Grid.Column="3" Grid.Row="1" VerticalAlignment="Bottom"/>
         <ListBox x:Name="ItemsInPackListBox" Grid.Column="3" Grid.Row="2" Grid.RowSpan="4" ItemsSource="{Binding Source={StaticResource vm}, Path=ItemsInPack}" DisplayMemberPath="ItemName" SelectedItem="{Binding Source={StaticResource vm}, Path=SelectedPackItem}" />
         <Button x:Name="BrowseButton" Content="..." Grid.Column="4" Grid.Row="1" VerticalAlignment="Top" MinHeight="25" Command="{Binding Source={StaticResource vm}, Path=BrowseCommand}"/>

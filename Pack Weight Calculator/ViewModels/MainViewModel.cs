@@ -120,6 +120,7 @@ namespace Pack_Weight_Calculator.ViewModels
         public SimpleCommand RemoveItemFromPackCommand { get; set; }
         public SimpleCommand SearchInventoryCommand { get; set; }
         public SimpleCommand ClearSearchCommand { get; set; }
+        public SimpleCommand RemoveAllItemsFromPackCommand { get; set; }
 
         public MainViewModel()
         {
@@ -131,6 +132,7 @@ namespace Pack_Weight_Calculator.ViewModels
             RemoveItemFromPackCommand = new SimpleCommand(this, "RemoveFromPackButton");
             SearchInventoryCommand = new SimpleCommand(this, "SearchInventory");
             ClearSearchCommand = new SimpleCommand(this, "ClearSearch");
+            RemoveAllItemsFromPackCommand = new SimpleCommand(this, "RemoveAllItemsFromPackButton");
         }
 
         public void OpenFileBrowserDialog()
@@ -190,12 +192,18 @@ namespace Pack_Weight_Calculator.ViewModels
         public void CalculatePackWeight()
         {
             var tempWeightOunces = 0.0;
+
             foreach (var item in ItemsInPack)
             {
                 tempWeightOunces += item.ItemWeight;
             }
+
             PackWeight = (tempWeightOunces/16).ToString("##.##");
             PackWeight += " lbs";
+
+            if (tempWeightOunces == 0)
+                PackWeight = "0 lbs";
+
         }
 
         public void SearchInventory()
@@ -222,6 +230,19 @@ namespace Pack_Weight_Calculator.ViewModels
                     _backupInventory.Remove(_backupInventory[i]);
 
             ItemsInInventory = _backupInventory;
+        }
+
+        public void RemoveAllItemsFromPack()
+        {
+
+            for (int i = 0; i < ItemsInPack.Count; i++)
+            {
+                ItemsInInventory.Add(ItemsInPack[i]);               
+            }
+
+            ItemsInPack.Clear();
+            CalculatePackWeight();
+            Console.WriteLine("Removed All Items from Pack");
         }
     }
 }
