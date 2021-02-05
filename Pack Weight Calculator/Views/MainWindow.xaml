@@ -40,6 +40,7 @@
         <ListBox x:Name="InventoryListBox" Grid.Column="1" Grid.Row="2" Grid.RowSpan="4" ItemsSource="{Binding Source={StaticResource vm}, Path=ItemsInInventory}" DisplayMemberPath="ItemName" SelectedItem="{Binding Source={StaticResource vm}, Path=SelectedInventoryItem}" />
         <Label x:Name="InventoryDirectoryLabel" Content="Loaded Inventory: " Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <TextBox x:Name="InventoryDirectoryTextbox" Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" MinHeight="25" FontSize="14" Text="{Binding Source={StaticResource vm}, Path=Filename}"/>
+        <Button x:Name="AddAllItemsToPackButton" Grid.Column="2" Grid.Row="2" Content="Add All ->>" Command="{Binding Source={StaticResource vm}, Path=AddAllItemsToPackCommand}"/>
         <Button x:Name="AddItemToPackButton" Grid.Column="2" Grid.Row="3" Content="Add ->" Command="{Binding Source={StaticResource vm}, Path=AddItemToPackCommand}"/>
         <Button x:Name="RemoveItemFromPackButton" Grid.Column="2" Grid.Row="4" Content="&lt;- Remove" Command="{Binding Source={StaticResource vm}, Path=RemoveItemFromPackCommand}"/>
         <Button x:Name="RemoveAllItemsFromPackButton" Grid.Column="2" Grid.Row="5" Content="&lt;&lt;- Remove All" Command="{Binding Source= {StaticResource vm}, Path=RemoveAllItemsFromPackCommand}"/>

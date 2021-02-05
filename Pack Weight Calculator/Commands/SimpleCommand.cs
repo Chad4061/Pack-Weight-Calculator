@@ -43,6 +43,9 @@ namespace Pack_Weight_Calculator.Commands
 
             if (ButtonName == "RemoveAllItemsFromPackButton")
                 ViewModel.RemoveAllItemsFromPack();
+
+            if (ButtonName == "AddAllItemsToPackButton")
+                ViewModel.AddAllItemsToPack();
         }
     }
 }

@@ -121,6 +121,7 @@ namespace Pack_Weight_Calculator.ViewModels
         public SimpleCommand SearchInventoryCommand { get; set; }
         public SimpleCommand ClearSearchCommand { get; set; }
         public SimpleCommand RemoveAllItemsFromPackCommand { get; set; }
+        public SimpleCommand AddAllItemsToPackCommand { get; set; }
 
         public MainViewModel()
         {
@@ -133,6 +134,7 @@ namespace Pack_Weight_Calculator.ViewModels
             SearchInventoryCommand = new SimpleCommand(this, "SearchInventory");
             ClearSearchCommand = new SimpleCommand(this, "ClearSearch");
             RemoveAllItemsFromPackCommand = new SimpleCommand(this, "RemoveAllItemsFromPackButton");
+            AddAllItemsToPackCommand = new SimpleCommand(this, "AddAllItemsToPackButton");
         }
 
         public void OpenFileBrowserDialog()
@@ -243,6 +245,17 @@ namespace Pack_Weight_Calculator.ViewModels
             ItemsInPack.Clear();
             CalculatePackWeight();
             Console.WriteLine("Removed All Items from Pack");
+        }
+
+        public void AddAllItemsToPack()
+        {
+            foreach (var item in ItemsInInventory)
+            {
+                ItemsInPack.Add(item);
+            }
+            ItemsInInventory.Clear();
+            CalculatePackWeight();
+            Console.WriteLine("Added All Items to Pack");
         }
     }
 }
